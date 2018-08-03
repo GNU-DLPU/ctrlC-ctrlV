@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>cool-background</title>
+    <link rel="stylesheet" href="css/hero-slider-style.css">
+    <link rel="stylesheet" href="css/templatemo-style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/color.js"></script>
+</head>
+    <body>
+        <div class="cd-hero">
+            <ul class="cd-hero-slider">
+                <li class="selected" id="bg">
+                    <div class="cd-full-width">
+                        <div class="container-fluid js-tm-page-content tm-page-1" data-page-no="1">
+                          <div class="container-fluid js-tm-page-content" data-page-no="4">
+                            <a class="btn btn-1 btn-sm" href="http://www.bejson.com/" target="_blank">JSON</a>
+                            <a class="btn btn-1 btn-sm" href="http://tool.chinaz.com/tools/unicode.aspx" target="_blank">Unicoder</a>
+                            <a class="btn btn-1 btn-sm" href="http://coolaf.com/" target="_blank">Request</a>
+                            <a class="btn btn-1 btn-sm" href="https://developer.android.google.cn/develop/index.html" target="_blank">Android Developer</a>
+                            <a class="btn btn-1 btn-sm" href="http://androidxref.com/" target="_blank">AndroidXref</a>
+                            <br/>
+                            <a class="btn btn-1 btn-sm" href="https://unsplash.com/" target="_blank">Unsplash</a>
+                            <a class="btn btn-1 btn-sm" href="http://588ku.com/" target="_blank">QianKu</a>
+                            <a class="btn btn-1 btn-sm" href="http://www.iconfont.cn/" target="_blank">IconFont</a>
+                            <br/>
+                            <a class="btn btn-1 btn-sm" href="http://tool.c7sky.com/webcolor/" target="_blank">Color</a>
+                            <a class="btn btn-1 btn-sm" href="https://www.materialpalette.com/" target="_blank">Palette</a>
+                            <a class="btn btn-1 btn-sm" href="http://encycolorpedia.cn/" target="_blank">RGBDetail</a>
+                            <a class="btn btn-1 btn-sm" href="http://www.sioe.cn/yingyong/yanse-rgb-16/" target="_blank">RGBSearch</a>
+                            <a class="btn btn-1 btn-sm" href="http://angrytools.com/android/button/" target="_blank">ButtonMaker</a>
+                            <br/>
+                            <a class="btn btn-1 btn-sm" href="http://fanyi.baidu.com/" target="_blank">BaiduTrans</a>
+                            <a class="btn btn-1 btn-sm" href="https://translate.google.cn/" target="_blank">GoogleTrans</a>
+                            <a class="btn btn-1 btn-sm" href="https://www.zhihu.com/" target="_blank">ZhiHu</a>
+                            <a class="btn btn-1 btn-sm" href="https://juejin.im/welcome" target="_blank">JueJin</a>
+                            <a class="btn btn-1 btn-sm" href="https://www.baidu.com/" target="_blank">Baidu</a>
+                            <a class="btn btn-1 btn-sm" href="https://cn.bing.com/" target="_blank">Bing</a>
+                            <a class="btn btn-1 btn-sm" href="https://www.google.com/" target="_blank">Google</a>
+                            <br/>
+                            <a class="btn btn-1 btn-sm" href="http://store.steampowered.com/" target="_blank">Steam</a>
+                            <a class="btn btn-1 btn-sm" href="https://www.origin.com/irl/zh-tw/" target="_blank">Origin</a>
+                            <a class="btn btn-1 btn-sm" href="http://www.ubisoft.com.cn/" target="_blank">Ubsoft</a>
+                            <a class="btn btn-1 btn-sm" href="https://steamdb.info/" target="_blank">SteamDB</a>
+                            <a class="btn btn-1 btn-sm" href="http://www.3dmgame.com/" target="_blank">3DM</a>
+
+                          </div>
+                        </div>
+                    </div>
+                </li>
+                <li></li>
+            </ul>
+        </div>
+        <div id="loader-wrapper">
+            <div id="loader"></div>
+            <div class="loader-section section-left"></div>
+            <div class="loader-section section-right"></div>
+        </div>
+
+        <script>
+            var color1=null;
+            var color2=null;
+            function random(){
+                return '#'+Math.random().toString(16).slice(2,8);
+            }
+            function start(){
+                color1=random();
+                document.getElementById("#bg").style.backgroundColor=color1;
+                setTimeout(changeColor, 2000);
+            }
+            function changeColor(){
+                var a,b,c,i=0;
+                var animate=null;
+                color2=random();
+                var array1=strSlip(color1);
+                var array2=strSlip(color2);
+                var r1=array2[0]-array1[0];
+                var r2=array2[1]-array1[1];
+                var r3=array2[2]-array1[2];
+                 animate=setInterval(function(){
+                    array1[0]=array1[0]+Math.round(r1/30);
+                    array1[1]=array1[1]+Math.round(r2/30);
+                    array1[2]=array1[2]+Math.round(r3/30);
+                    a=array1[0].toString(16);
+                    b=array1[1].toString(16);
+                    c=array1[2].toString(16);
+                    i++;
+                    document.getElementById("#bg").style.backgroundColor=returnColor(a,b,c);
+                    if(i==20){
+                        clearInterval(animate);
+                        color1=returnColor(a,b,c);
+                    }
+                },100);
+                setTimeout(changeColor, 7000);
+            }
+            function returnColor(a,b,c){
+                 return "#"+a+b+c;
+            }
+            function strSlip(str){
+                var num=[];
+                var x=parseInt(str.substring(1,3),16);
+                var y=parseInt(str.substring(3,5),16);
+                var z=parseInt(str.substring(5,7),16);
+                num.push(x);
+                num.push(y);
+                num.push(z);
+                return num;
+            }
+        start();
+    </script>
+    <script>
+         $(window).load(function(){
+            $('body').addClass('loaded');
+        });
+        start();
+    </script>
+</body>
+</html>
